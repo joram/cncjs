@@ -20,6 +20,7 @@ import {
   GRBL_ACTIVE_STATE_SLEEP,
   GRBL_ACTIVE_STATE_ALARM,
   GRBL_ACTIVE_STATE_CHECK,
+  GRBL_ACTIVE_STATE_TOOL,
   // Marlin
   MARLIN,
   // Smoothie
@@ -104,7 +105,8 @@ class PrimaryToolbar extends PureComponent {
           [GRBL_ACTIVE_STATE_HOME]: 'controller-state-primary',
           [GRBL_ACTIVE_STATE_SLEEP]: 'controller-state-success',
           [GRBL_ACTIVE_STATE_ALARM]: 'controller-state-danger',
-          [GRBL_ACTIVE_STATE_CHECK]: 'controller-state-info'
+          [GRBL_ACTIVE_STATE_CHECK]: 'controller-state-info',
+          [GRBL_ACTIVE_STATE_TOOL]: 'controller-state-warning'
         }[activeState];
 
         stateText = {
@@ -115,7 +117,8 @@ class PrimaryToolbar extends PureComponent {
           [GRBL_ACTIVE_STATE_HOME]: i18n.t('controller:Grbl.activeState.home'),
           [GRBL_ACTIVE_STATE_SLEEP]: i18n.t('controller:Grbl.activeState.sleep'),
           [GRBL_ACTIVE_STATE_ALARM]: i18n.t('controller:Grbl.activeState.alarm'),
-          [GRBL_ACTIVE_STATE_CHECK]: i18n.t('controller:Grbl.activeState.check')
+          [GRBL_ACTIVE_STATE_CHECK]: i18n.t('controller:Grbl.activeState.check'),
+          [GRBL_ACTIVE_STATE_TOOL]: i18n.t('controller:Grbl.activeState.tool')
         }[activeState];
       }
 

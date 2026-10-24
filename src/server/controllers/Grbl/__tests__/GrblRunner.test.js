@@ -1,6 +1,7 @@
 /* eslint-env jest */
 import trim from 'lodash/trim';
 import GrblRunner from '../GrblRunner';
+import { GRBL_ACTIVE_STATE_TOOL } from '../constants';
 
 describe('GrblRunner', () => {
   // $10 - Status report mask:binary
@@ -150,6 +151,20 @@ describe('GrblRunner', () => {
     // Ov without A is Grbl's next accessory snapshot: all accessories are off.
     runner.parse('<Idle|MPos:5.000,2.000,0.000|FS:0,0|Ov:100,100,100>');
     expect(runner.state.status.accessoryState).toEqual('');
+  });
+
+  test('GrblLineParserResultStatus: grblHAL Tool state during a tool change', () => {
+    return new Promise((resolve) => {
+      const runner = new GrblRunner();
+      runner.on('status', ({ raw, ...status }) => {
+        expect(status.activeState).toEqual(GRBL_ACTIVE_STATE_TOOL);
+        expect(status.activeState).toEqual('Tool');
+        resolve();
+      });
+
+      const line = '<Tool|MPos:0.000,0.000,0.000|FS:0,0>';
+      runner.parse(line);
+    });
   });
 
   test('GrblLineParserResultOk', () => {
