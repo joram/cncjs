@@ -244,6 +244,213 @@ export const GRBL_ERRORS = [
     code: 38,
     message: 'Invalid gcode ID:38',
     description: 'Tool number greater than max supported value.'
+  },
+  // grblHAL
+  // https://github.com/grblHAL/core/blob/master/errors.c
+  {
+    code: 39,
+    message: 'Value out of range',
+    description: 'Value out of range.'
+  },
+  {
+    code: 40,
+    message: 'G-code command not allowed when tool change is pending',
+    description: 'G-code command not allowed when tool change is pending.'
+  },
+  {
+    code: 41,
+    message: 'Spindle not running when motion commanded in CSS or spindle sync mode',
+    description: 'Spindle not running when motion commanded in CSS or spindle sync mode.'
+  },
+  {
+    code: 42,
+    message: 'Plane must be ZX for threading and lathe cycles',
+    description: 'Plane must be ZX for threading and lathe cycles.'
+  },
+  {
+    code: 43,
+    message: 'Max. feed rate exceeded',
+    description: 'Max. feed rate exceeded.'
+  },
+  {
+    code: 44,
+    message: 'RPM out of range',
+    description: 'RPM out of range.'
+  },
+  {
+    code: 45,
+    message: 'Only homing is allowed when a limit switch is engaged',
+    description: 'Only homing is allowed when a limit switch is engaged.'
+  },
+  {
+    code: 46,
+    message: 'Home machine to continue',
+    description: 'Home machine to continue.'
+  },
+  {
+    code: 47,
+    message: 'ATC: current tool is not set. Set current tool with M61',
+    description: 'ATC: current tool is not set. Set current tool with M61.'
+  },
+  {
+    code: 48,
+    message: 'Value word conflict',
+    description: 'Value word conflict.'
+  },
+  {
+    code: 49,
+    message: 'Power on self test failed. A hard reset is required',
+    description: 'Power on self test failed. A hard reset is required.'
+  },
+  {
+    code: 50,
+    message: 'Emergency stop active',
+    description: 'Emergency stop active.'
+  },
+  {
+    code: 51,
+    message: 'Motor fault',
+    description: 'Motor fault.'
+  },
+  {
+    code: 52,
+    message: 'Setting value is out of range',
+    description: 'Setting value is out of range.'
+  },
+  {
+    code: 53,
+    message: 'Setting is not available, possibly due to limited driver support',
+    description: 'Setting is not available, possibly due to limited driver support.'
+  },
+  {
+    code: 54,
+    message: 'Retract position is less than drill depth',
+    description: 'Retract position is less than drill depth.'
+  },
+  {
+    code: 55,
+    message: 'Attempt to home two auto squared axes at the same time',
+    description: 'Attempt to home two auto squared axes at the same time.'
+  },
+  {
+    code: 56,
+    message: 'Coordinate system is locked',
+    description: 'Coordinate system is locked.'
+  },
+  {
+    code: 57,
+    message: 'Unexpected file demarcation',
+    description: 'Unexpected file demarcation.'
+  },
+  {
+    code: 58,
+    message: 'Port is not available',
+    description: 'Port is not available'
+  },
+  {
+    code: 71,
+    message: 'Unknown operation found in expression',
+    description: 'Unknown operation found in expression.'
+  },
+  {
+    code: 72,
+    message: 'Divide by zero in expression attempted',
+    description: 'Divide by zero in expression attempted.'
+  },
+  {
+    code: 73,
+    message: 'Too large or too small argrument provided',
+    description: 'Too large or too small argrument provided.'
+  },
+  {
+    code: 74,
+    message: 'Argument is not valid for the operation',
+    description: 'Argument is not valid for the operation'
+  },
+  {
+    code: 75,
+    message: 'Expression is not valid',
+    description: 'Expression is not valid.'
+  },
+  {
+    code: 76,
+    message: 'Either NAN (not a number) or infinity was returned from expression',
+    description: 'Either NAN (not a number) or infinity was returned from expression.'
+  },
+  {
+    code: 77,
+    message: 'Authentication required',
+    description: 'Authentication required.'
+  },
+  {
+    code: 78,
+    message: 'Access denied',
+    description: 'Access denied.'
+  },
+  {
+    code: 79,
+    message: 'Not allowed while critical event is active',
+    description: 'Not allowed while critical event is active.'
+  },
+  {
+    code: 80,
+    message: 'Flow statement only allowed in filesystem macro',
+    description: 'Flow statement only allowed in filesystem macro.'
+  },
+  {
+    code: 81,
+    message: 'Unknown flow statement',
+    description: 'Unknown flow statement.'
+  },
+  {
+    code: 82,
+    message: 'Stack overflow while executing flow statement',
+    description: 'Stack overflow while executing flow statement.'
+  },
+  {
+    code: 83,
+    message: 'Out of memory while executing flow statement',
+    description: 'Out of memory while executing flow statement.'
+  },
+  {
+    code: 84,
+    message: 'Could not open file',
+    description: 'Could not open file.'
+  },
+  {
+    code: 86,
+    message: 'Port is not usable',
+    description: 'Port is not usable.'
+  },
+  {
+    code: 87,
+    message: 'Tool in spindle',
+    description: 'Tool in spindle.'
+  },
+  {
+    code: 88,
+    message: 'No tool in spindle',
+    description: 'No tool in spindle.'
+  },
+  {
+    code: 90,
+    message: 'Cutter compensation is already active',
+    description: 'Cutter compensation is already active.'
+  },
+  {
+    code: 91,
+    message: 'Command not allowed while cutter compensation is active',
+    description: 'Command not allowed while cutter compensation is active.'
+  },
+  {
+    code: 92,
+    message: 'Cutter compensation is not valid for current move',
+    description: 'Cutter compensation is not valid for current move.'
+  },
+  {
+    code: 253,
+    message: 'User defined error occured',
+    description: 'User defined error occured.'
   }
 ];
 
@@ -294,6 +501,73 @@ export const GRBL_ALARMS = [
     code: 9,
     message: 'Homing fail',
     description: 'Homing fail. Could not find limit switch within search distances. Try increasing max travel, decreasing pull-off distance, or check wiring.'
+  },
+  // grblHAL
+  // https://github.com/grblHAL/core/blob/master/alarms.c
+  {
+    code: 10,
+    message: 'EStop asserted. Clear and reset',
+    description: 'EStop asserted. Clear and reset'
+  },
+  {
+    code: 11,
+    message: 'Homing required. Execute homing command ($H) to continue',
+    description: 'Homing required. Execute homing command ($H) to continue.'
+  },
+  {
+    code: 12,
+    message: 'Limit switch engaged. Clear before continuing',
+    description: 'Limit switch engaged. Clear before continuing.'
+  },
+  {
+    code: 13,
+    message: 'Probe protection triggered. Clear before continuing',
+    description: 'Probe protection triggered. Clear before continuing.'
+  },
+  {
+    code: 14,
+    message: 'Spindle at speed timeout. Clear before continuing',
+    description: 'Spindle at speed timeout. Clear before continuing.'
+  },
+  {
+    code: 15,
+    message: 'Homing fail. Could not find second limit switch for auto squared axis within search distances. Try increasing max travel, decreasing pull-off distance, or check wiring',
+    description: 'Homing fail. Could not find second limit switch for auto squared axis within search distances. Try increasing max travel, decreasing pull-off distance, or check wiring.'
+  },
+  {
+    code: 16,
+    message: 'Power on selftest (POS) failed',
+    description: 'Power on selftest (POS) failed.'
+  },
+  {
+    code: 17,
+    message: 'Motor fault',
+    description: 'Motor fault.'
+  },
+  {
+    code: 18,
+    message: 'Homing fail. Bad configuration',
+    description: 'Homing fail. Bad configuration.'
+  },
+  {
+    code: 19,
+    message: 'Modbus exception. Timeout or message error',
+    description: 'Modbus exception. Timeout or message error.'
+  },
+  {
+    code: 20,
+    message: 'I/O expander communication failed',
+    description: 'I/O expander communication failed.'
+  },
+  {
+    code: 21,
+    message: 'Non Volatile Storage (EEPROM) failure',
+    description: 'Non Volatile Storage (EEPROM) failure.'
+  },
+  {
+    code: 22,
+    message: 'Buffer overflow',
+    description: 'Buffer overflow.'
   }
 ];
 
