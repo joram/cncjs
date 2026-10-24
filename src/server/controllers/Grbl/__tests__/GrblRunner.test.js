@@ -357,6 +357,34 @@ describe('GrblRunner', () => {
       });
     });
 
+    test('grblHAL - G51 scaling reports the scaled axes after a colon', () => {
+      return new Promise((resolve) => {
+        const runner = new GrblRunner();
+        runner.on('parserstate', ({ raw, ...parserstate }) => {
+          expect(raw).toEqual('[GC:G0 G54 G17 G21 G90 G94 G49 G98 G51:XY M5 M9 T0 F0 S0.]');
+          expect(parserstate).toEqual({
+            modal: {
+              motion: 'G0', // G0, G1, G2, G3, G38.2, G38.3, G38.4, G38.5, G80
+              wcs: 'G54', // G54, G55, G56, G57, G58, G59
+              plane: 'G17', // G17: xy-plane, G18: xz-plane, G19: yz-plane
+              units: 'G21', // G20: Inches, G21: Millimeters
+              distance: 'G90', // G90: Absolute, G91: Relative
+              feedrate: 'G94', // G93: Inverse Time Mode, G94: Units Per Minutes
+              spindle: 'M5', // M3, M4, M5
+              coolant: 'M9', // M7, M8, M9
+            },
+            tool: '0',
+            feedrate: '0',
+            spindle: '0.',
+          });
+          resolve();
+        });
+
+        const line = '[GC:G0 G54 G17 G21 G90 G94 G49 G98 G51:XY M5 M9 T0 F0 S0.]';
+        runner.parse(line);
+      });
+    });
+
     test('Handles invalid parser state output', () => {
       return new Promise((resolve, reject) => {
         const runner = new GrblRunner();
