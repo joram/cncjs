@@ -970,6 +970,27 @@ describe('GrblController', () => {
     });
   });
 
+  describe('error and alarm codes', () => {
+    const serialReads = (socketEvents) => {
+      return socketEvents
+        .filter(({ event }) => event === 'serialport:read')
+        .map(({ args }) => args[0]);
+    };
+
+    test.each([
+      ['error:9', 'error:9 (G-code lock)'],
+      ['error:79', 'error:79 (Not allowed while critical event is active)'],
+      ['ALARM:1', 'ALARM:1 (Hard limit)'],
+      ['ALARM:14', 'ALARM:14 (Spindle at speed timeout. Clear before continuing)'],
+    ])('%s is reported with its description', (line, expected) => {
+      const { controller, socketEvents } = setup();
+
+      controller.runner.parse(line);
+
+      expect(serialReads(socketEvents)).toEqual([expected]);
+    });
+  });
+
   describe('negative', () => {
     test('unknown command writes nothing', () => {
       const { controller, writes, socketEvents } = setup();

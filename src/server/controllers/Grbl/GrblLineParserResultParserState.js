@@ -23,13 +23,17 @@ class GrblLineParserResultParserState {
   //   [GC:G0 G54 G17 G21 G90 G94 M5 M M9 T0 F0 S0]
   //   [GC:G0 G54 G17 G21 G90 G94 M5 M9 T F0 S0]
   //   ```
+  // * grblHAL reports the scaled axes after G51 while scaling is active:
+  //   ```
+  //   [GC:G0 G54 G17 G21 G90 G94 G49 G98 G51:XY M5 M9 T0 F0 S0.]
+  //   ```
   static parse(line) {
     const parseLine = (line) => {
       const patterns = [
         // Matches standard output for Grbl v0.9 and v1.x
-        /^\[(?:GC:)?((?:[GMTFS]\d+(?:\.\d*)?\s+)+(?:[GMTFS]\d+(?:\.\d*)?))\]$/,
+        /^\[(?:GC:)?((?:[GMTFS]\d+(?:\.\d*)?(?::[A-Z]+)?\s+)+(?:[GMTFS]\d+(?:\.\d*)?))\]$/,
         // Matches some Grbl v1.x forks with incorrect parser state output
-        /^\[GC:((?:[GMTFS]\d*(?:\.\d*)?\s+)+(?:[GMTFS]\d+(?:\.\d*)?))\]$/
+        /^\[GC:((?:[GMTFS]\d*(?:\.\d*)?(?::[A-Z]+)?\s+)+(?:[GMTFS]\d+(?:\.\d*)?))\]$/
       ];
       for (const pattern of patterns) {
         const match = line.match(pattern);

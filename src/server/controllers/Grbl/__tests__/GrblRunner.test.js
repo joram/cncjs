@@ -1,6 +1,7 @@
 /* eslint-env jest */
 import trim from 'lodash/trim';
 import GrblRunner from '../GrblRunner';
+import { GRBL_ACTIVE_STATE_TOOL } from '../constants';
 
 describe('GrblRunner', () => {
   // $10 - Status report mask:binary
@@ -150,6 +151,20 @@ describe('GrblRunner', () => {
     // Ov without A is Grbl's next accessory snapshot: all accessories are off.
     runner.parse('<Idle|MPos:5.000,2.000,0.000|FS:0,0|Ov:100,100,100>');
     expect(runner.state.status.accessoryState).toEqual('');
+  });
+
+  test('GrblLineParserResultStatus: grblHAL Tool state during a tool change', () => {
+    return new Promise((resolve) => {
+      const runner = new GrblRunner();
+      runner.on('status', ({ raw, ...status }) => {
+        expect(status.activeState).toEqual(GRBL_ACTIVE_STATE_TOOL);
+        expect(status.activeState).toEqual('Tool');
+        resolve();
+      });
+
+      const line = '<Tool|MPos:0.000,0.000,0.000|FS:0,0>';
+      runner.parse(line);
+    });
   });
 
   test('GrblLineParserResultOk', () => {
@@ -353,6 +368,34 @@ describe('GrblRunner', () => {
         });
 
         const line = '[GC:G0 G54 G17 G21 G90 G94 M5 M9 T F0 S0]';
+        runner.parse(line);
+      });
+    });
+
+    test('grblHAL - G51 scaling reports the scaled axes after a colon', () => {
+      return new Promise((resolve) => {
+        const runner = new GrblRunner();
+        runner.on('parserstate', ({ raw, ...parserstate }) => {
+          expect(raw).toEqual('[GC:G0 G54 G17 G21 G90 G94 G49 G98 G51:XY M5 M9 T0 F0 S0.]');
+          expect(parserstate).toEqual({
+            modal: {
+              motion: 'G0', // G0, G1, G2, G3, G38.2, G38.3, G38.4, G38.5, G80
+              wcs: 'G54', // G54, G55, G56, G57, G58, G59
+              plane: 'G17', // G17: xy-plane, G18: xz-plane, G19: yz-plane
+              units: 'G21', // G20: Inches, G21: Millimeters
+              distance: 'G90', // G90: Absolute, G91: Relative
+              feedrate: 'G94', // G93: Inverse Time Mode, G94: Units Per Minutes
+              spindle: 'M5', // M3, M4, M5
+              coolant: 'M9', // M7, M8, M9
+            },
+            tool: '0',
+            feedrate: '0',
+            spindle: '0.',
+          });
+          resolve();
+        });
+
+        const line = '[GC:G0 G54 G17 G21 G90 G94 G49 G98 G51:XY M5 M9 T0 F0 S0.]';
         runner.parse(line);
       });
     });
