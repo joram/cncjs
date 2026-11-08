@@ -1,0 +1,772 @@
+$bg = #101215;
+$surface = #1a1d22;
+$surface-raised = #23272e;
+$surface-bar = #16191d;
+$border = #2e333b;
+$text = #eceef1;
+$muted = #9aa3ae;
+$primary = #4da3ff;
+$on-primary = #0b1a2b;
+$warn = #f5a524;
+$on-warn = #1a1200;
+$danger = #c62a2f;
+$danger-text = #ff8a80;
+$mono = 'JetBrains Mono', 'DejaVu Sans Mono', Menlo, Consolas, monospace;
+
+.touch {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    background: $bg;
+    color: $text;
+    font-family: Inter, 'Helvetica Neue', Arial, sans-serif;
+    overflow: hidden;
+    user-select: none;
+}
+
+.mono {
+    font-family: $mono;
+    font-variant-numeric: tabular-nums;
+}
+
+.label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $muted;
+}
+
+.btn {
+    appearance: none;
+    box-sizing: border-box;
+    border: 1px solid $border;
+    background: $surface-raised;
+    color: $text;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 12px;
+    cursor: pointer;
+    touch-action: manipulation;
+
+    &:active {
+        transform: scale(0.97);
+    }
+    &:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+        transform: none;
+    }
+    &:focus {
+        outline: none;
+    }
+    &:focus-visible {
+        outline: 3px solid $primary;
+        outline-offset: 2px;
+    }
+}
+
+.btn-active,
+.btn-primary {
+    background: $primary;
+    border-color: $primary;
+    color: $on-primary;
+}
+
+.btn-warn {
+    background: $warn;
+    border-color: $warn;
+    color: $on-warn;
+}
+
+.btn-danger {
+    background: $danger;
+    border-color: $danger;
+    color: #fff;
+}
+
+.btn-stop {
+    border-color: $danger;
+    color: $danger-text;
+}
+
+.btn-stack {
+    flex-direction: column;
+    gap: 4px;
+}
+
+// Top bar
+
+.top-bar {
+    height: 72px;
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 16px;
+    border-bottom: 1px solid $border;
+    background: $surface-bar;
+}
+
+.brand {
+    width: 388px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.brand-name {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.brand-port {
+    font-size: 13px;
+    color: $muted;
+}
+
+.state {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.state-message {
+    font-size: 17px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.badge {
+    appearance: none;
+    border: 0;
+    border-radius: 999px;
+    height: 48px;
+    min-width: 132px;
+    padding: 0 20px;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: $border;
+    color: $text;
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.badge-primary {
+    background: $primary;
+    color: $on-primary;
+}
+
+.badge-warn {
+    background: $warn;
+    color: $on-warn;
+}
+
+.badge-danger {
+    background: $danger;
+    color: #fff;
+}
+
+.top-button {
+    height: 56px;
+    width: 128px;
+}
+
+// Body
+
+.body {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+}
+
+.position-panel {
+    width: 420px;
+    flex: none;
+    box-sizing: border-box;
+    padding: 16px;
+    border-right: 1px solid $border;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.position-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 4px;
+}
+
+.axis-row {
+    height: 116px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0 14px;
+    background: $surface;
+    border: 1px solid $border;
+    border-radius: 14px;
+}
+
+.axis-name {
+    width: 36px;
+    font-size: 36px;
+    font-weight: 700;
+    color: $primary;
+}
+
+.axis-values {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.axis-work {
+    font-size: 42px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.axis-machine {
+    font-size: 15px;
+    color: $muted;
+}
+
+.axis-zero {
+    width: 80px;
+    height: 80px;
+    flex: none;
+    font-size: 20px;
+}
+
+.axis-zero-hint {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: $muted;
+}
+
+.spacer {
+    flex: 1;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.panel-button {
+    height: 64px;
+}
+
+.main {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1;
+    min-height: 0;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.tabs {
+    height: 84px;
+    flex: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 1px solid $border;
+    background: $surface-bar;
+}
+
+.tab {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: $muted;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.tab-active {
+    color: $primary;
+    background: $surface;
+    box-shadow: inset 0 3px 0 $primary;
+}
+
+.notice {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    font-size: 18px;
+    color: $muted;
+    text-align: center;
+
+    a {
+        color: $primary;
+    }
+}
+
+// Jog tab
+
+.jog {
+    height: 100%;
+    display: flex;
+    gap: 28px;
+}
+
+.jog-pad {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.jog-row {
+    display: flex;
+    gap: 16px;
+}
+
+.jog-xy {
+    width: 384px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.jog-button {
+    height: 120px;
+}
+
+.jog-z {
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.jog-z-button {
+    height: 186px;
+}
+
+.jog-step {
+    height: 120px;
+    border-radius: 12px;
+    border: 1px dashed $border;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.jog-step-value {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.jog-options {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.option-label {
+    margin-top: 14px;
+}
+
+.option-button {
+    height: 60px;
+}
+
+.accessory-button {
+    height: 72px;
+    font-size: 16px;
+}
+
+.accessory-state {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+// Job tab
+
+.job {
+    height: 100%;
+    display: flex;
+    gap: 20px;
+}
+
+.column {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.column-header {
+    height: 48px;
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.column-title {
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.collapse-button {
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    flex: none;
+}
+
+.rail {
+    appearance: none;
+    flex: none;
+    width: 64px;
+    height: 100%;
+    box-sizing: border-box;
+    border: 1px solid $border;
+    background: $surface;
+    color: $text;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 0;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    overflow: hidden;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.rail-text {
+    writing-mode: vertical-rl;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 0;
+}
+
+.rail-sub {
+    color: $muted;
+    font-weight: 500;
+}
+
+.file-list {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.file {
+    appearance: none;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 64px;
+    flex: none;
+    border: 1px solid $border;
+    background: $surface;
+    color: $text;
+    border-radius: 12px;
+    padding: 10px 14px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+    &:focus {
+        outline: none;
+    }
+}
+
+.file-active {
+    border-color: $primary;
+    background: #17283b;
+}
+
+.file-name {
+    font-size: 15px;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.file-meta {
+    font-size: 13px;
+    color: $muted;
+}
+
+.preview-name {
+    font-size: 17px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.preview-dims {
+    flex: 1;
+    min-width: 0;
+    font-size: 14px;
+    color: $muted;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.preview {
+    flex: 1;
+    min-height: 0;
+    position: relative;
+    border-radius: 12px;
+    background: #0b0d10;
+    border: 1px solid $border;
+    overflow: hidden;
+
+    canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
+
+.preview-empty {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $muted;
+    font-size: 16px;
+}
+
+.progress {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.progress-track {
+    height: 12px;
+    border-radius: 6px;
+    background: $surface-raised;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: $primary;
+    border-radius: 6px;
+}
+
+.progress-text {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: $muted;
+}
+
+.run-controls {
+    width: 160px;
+    flex: none;
+    gap: 12px;
+}
+
+.run-button {
+    flex: 1;
+    min-height: 0;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 20px;
+}
+
+// Probe tab
+
+.probe {
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.card {
+    box-sizing: border-box;
+    height: 100%;
+    background: $surface;
+    border: 1px solid $border;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.pin {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 36px;
+    padding: 0 14px;
+    border-radius: 999px;
+    background: $surface-raised;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.pin-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: $muted;
+}
+
+.pin-triggered {
+    background: $warn;
+    color: $on-warn;
+
+    .pin-dot {
+        background: $on-warn;
+    }
+}
+
+.field {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.field-label {
+    flex: 1;
+    font-size: 16px;
+    color: #c9ced6;
+}
+
+.field-button {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+}
+
+.field-value {
+    width: 130px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.result {
+    min-height: 20px;
+    font-size: 14px;
+    color: $muted;
+}
+
+.big-button {
+    height: 88px;
+    font-size: 22px;
+}
+
+.callout {
+    border-radius: 12px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: $surface-raised;
+}
+
+.callout-warn {
+    background: $warn;
+    color: $on-warn;
+}
+
+.callout-title {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.callout-text {
+    font-size: 16px;
+    line-height: 1.4;
+}

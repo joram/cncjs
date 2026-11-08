@@ -30,6 +30,18 @@ const defaultState = {
       id: null
     }
   },
+  touch: {
+    jog: {
+      step: 1, // mm
+      feedrate: 1500 // mm/min
+    },
+    job: {
+      // Expanded state of the job tab columns
+      files: true,
+      preview: true,
+      controls: true
+    }
+  },
   widgets: {
     autolevel: {
       minimized: false,
